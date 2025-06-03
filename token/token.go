@@ -30,10 +30,12 @@ const (
 	LET      = "LET"
 	IDENT    = "IDENT"
 	RETURN   = "RETURN"
+
+	INT = "INT"
 )
 
 var keywords = map[string]TokenType{
-	"func":   FUNCTION,
+	"fn":     FUNCTION,
 	"let":    LET,
 	"return": RETURN,
 }
