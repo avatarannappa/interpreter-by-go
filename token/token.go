@@ -8,41 +8,33 @@ type Token struct {
 }
 
 const (
-	ILLEGAL = "ILLEGAL"
-	EOF     = "EOF"
-
-	// 标识符+字面量
-	ASSIGN   = "="
-	PLUS     = "+"
-	MINUS    = "-"
-	BANG     = "!"
-	ASTERISK = "*"
-	SLASH    = "/"
-	LT       = "<"
-	GT       = ">"
-
-	// 分隔符
-	COMMA     = ","
-	SEMICOLON = ";"
-
-	LPAREN = "("
-	RPAREN = ")"
-	LBRACE = "{"
-	RBRACE = "}"
-
-	// 关键字
-	FUNCTION = "FUNCTION"
-	LET      = "LET"
-	IDENT    = "IDENT"
-	RETURN   = "RETURN"
-	TRUE     = "TRUE"
-	FALSE    = "FALSE"
-	IF       = "IF"
-	ELSE     = "ELSE"
-	EQ       = "=="
-	NOT_EQ   = "!="
-
-	INT = "INT"
+	ILLEGAL   TokenType = "ILLEGAL"
+	EOF       TokenType = "EOF"
+	ASSIGN    TokenType = "="
+	PLUS      TokenType = "+"
+	MINUS     TokenType = "-"
+	BANG      TokenType = "!"
+	ASTERISK  TokenType = "*"
+	SLASH     TokenType = "/"
+	LT        TokenType = "<"
+	GT        TokenType = ">"
+	COMMA     TokenType = ","
+	SEMICOLON TokenType = ";"
+	LPAREN    TokenType = "("
+	RPAREN    TokenType = ")"
+	LBRACE    TokenType = "{"
+	RBRACE    TokenType = "}"
+	FUNCTION  TokenType = "FUNCTION"
+	LET       TokenType = "LET"
+	IDENT     TokenType = "IDENT"
+	RETURN    TokenType = "RETURN"
+	TRUE      TokenType = "TRUE"
+	FALSE     TokenType = "FALSE"
+	IF        TokenType = "IF"
+	ELSE      TokenType = "ELSE"
+	EQ        TokenType = "=="
+	NOT_EQ    TokenType = "!="
+	INT       TokenType = "INT"
 )
 
 var keywords = map[string]TokenType{
