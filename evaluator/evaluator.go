@@ -44,9 +44,6 @@ func Eval(node ast.Node) object.Object {
 		return evalIfExpression(node)
 	case *ast.ReturnStatement:
 		val := Eval(node.ReturnValue)
-		if isError(val) {
-			return val
-		}
 		return &object.ReturnValue{Value: val}
 	}
 	return nil
@@ -97,7 +94,7 @@ func evalPrefixExpression(operator string, right object.Object) object.Object {
 	case "-":
 		return evalMinusPrefixOperatorExpression(right)
 	default:
-		return newError("unknown operator: %s%s", operator, right.Type())
+		return NULL // 未知的前缀操作符
 	}
 }
 
