@@ -1,6 +1,7 @@
 package repl
 
 import (
+	"awesomeProject/evaluator"
 	"awesomeProject/lexer"
 	"awesomeProject/parser"
 	"bufio"
@@ -30,8 +31,13 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		io.WriteString(out, program.String())
-		io.WriteString(out, "\n")
+		result := evaluator.Eval(program)
+		if result != nil {
+			io.WriteString(out, result.Inspect())
+			io.WriteString(out, "\n")
+		} else {
+			io.WriteString(out, "No result\n")
+		}
 	}
 }
 
