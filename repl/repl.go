@@ -3,6 +3,7 @@ package repl
 import (
 	"awesomeProject/evaluator"
 	"awesomeProject/lexer"
+	"awesomeProject/object"
 	"awesomeProject/parser"
 	"bufio"
 	"fmt"
@@ -13,6 +14,8 @@ const PROMPT = ">> "
 
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
+	// global env
+	env := object.NewEnviroment()
 
 	for {
 		fmt.Fprintf(out, PROMPT)
@@ -30,8 +33,7 @@ func Start(in io.Reader, out io.Writer) {
 			printParserErrors(out, p.Errors())
 			continue
 		}
-
-		result := evaluator.Eval(program)
+		result := evaluator.Eval(program, env)
 		if result != nil {
 			io.WriteString(out, result.Inspect())
 			io.WriteString(out, "\n")
