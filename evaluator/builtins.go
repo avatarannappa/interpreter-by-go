@@ -61,8 +61,10 @@ var builtins = map[string]*object.Buildin{
 				return NULL
 			}
 
-			newElements := make([]object.Object, len(array.Elements)-1, len(array.Elements)-1)
-			copy(newElements, array.Elements[1:])
+			//newElements := make([]object.Object, len(array.Elements)-1, len(array.Elements)-1)
+			//copy(newElements, array.Elements)
+			var newElements []object.Object
+			newElements = append(newElements, array.Elements[1:]...)
 			return &object.Array{Elements: newElements}
 		},
 	},
@@ -76,9 +78,9 @@ var builtins = map[string]*object.Buildin{
 			}
 			array := args[0].(*object.Array)
 
-			newElements := make([]object.Object, len(array.Elements)+1, len(array.Elements)+1)
-			copy(newElements, array.Elements)
-			newElements[len(array.Elements)] = args[1]
+			var newElements []object.Object
+			newElements = append(newElements, array.Elements...)
+			newElements = append(newElements, args[1])
 			return &object.Array{Elements: newElements}
 		},
 	},
