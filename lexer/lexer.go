@@ -83,6 +83,9 @@ func (l *Lexer) NextToken() token.Token {
 	case 0:
 		tok.Type = token.EOF
 		tok.Literal = ""
+	case '"':
+		tok.Type = token.STRING
+		tok.Literal = l.readString()
 	default:
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
@@ -135,4 +138,15 @@ func (l *Lexer) skipWhitespace() {
 func (l *Lexer) makeTwoCharToken() string {
 	l.readChar()
 	return l.input[l.position-1 : l.realPosition]
+}
+
+func (l *Lexer) readString() string {
+	start := l.position + 1
+	for {
+		l.readChar()
+		if l.ch == '"' || l.ch == 0 {
+			break
+		}
+	}
+	return l.input[start:l.position]
 }

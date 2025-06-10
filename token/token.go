@@ -35,6 +35,7 @@ const (
 	EQ        TokenType = "=="
 	NOT_EQ    TokenType = "!="
 	INT       TokenType = "INT"
+	STRING    TokenType = "STRING"
 )
 
 var keywords = map[string]TokenType{
