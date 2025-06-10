@@ -36,6 +36,8 @@ const (
 	NOT_EQ    TokenType = "!="
 	INT       TokenType = "INT"
 	STRING    TokenType = "STRING"
+	LBRANCKET TokenType = "["
+	RBRANCKET TokenType = "]"
 )
 
 var keywords = map[string]TokenType{
