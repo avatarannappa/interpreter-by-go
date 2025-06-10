@@ -38,6 +38,7 @@ const (
 	STRING    TokenType = "STRING"
 	LBRANCKET TokenType = "["
 	RBRANCKET TokenType = "]"
+	COLON     TokenType = ":"
 )
 
 var keywords = map[string]TokenType{
