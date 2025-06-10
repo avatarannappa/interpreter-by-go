@@ -17,6 +17,7 @@ const (
 	ERROR_OBJ        = "ERROR"
 	FUNCTION_OBJ     = "FUNCTION"
 	STRING_OBJ       = "STRING"
+	BUILDIN_OBJ      = "BUILDIN"
 )
 
 type Object interface {
@@ -87,3 +88,14 @@ type String struct {
 
 func (s *String) Type() ObjectType { return STRING_OBJ }
 func (s *String) Inspect() string  { return s.Value }
+
+type BuiltinFunction func(args ...Object) Object
+
+type Buildin struct {
+	Fn BuiltinFunction
+}
+
+func (b *Buildin) Type() ObjectType { return BUILDIN_OBJ }
+func (b *Buildin) Inspect() string {
+	return "builtin function"
+}
