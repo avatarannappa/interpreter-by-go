@@ -1,6 +1,9 @@
 package evaluator
 
-import "awesomeProject/object"
+import (
+	"awesomeProject/object"
+	"fmt"
+)
 
 var builtins = map[string]*object.Buildin{
 	"len": &object.Buildin{
@@ -82,6 +85,14 @@ var builtins = map[string]*object.Buildin{
 			newElements = append(newElements, array.Elements...)
 			newElements = append(newElements, args[1])
 			return &object.Array{Elements: newElements}
+		},
+	},
+	"puts": &object.Buildin{
+		Fn: func(args ...object.Object) object.Object {
+			for _, arg := range args {
+				fmt.Println(arg.Inspect())
+			}
+			return NULL
 		},
 	},
 }
