@@ -12,7 +12,7 @@ var (
 	NULL  = &object.Null{}
 )
 
-func Eval(node ast.Node, env *object.Enviroment) object.Object {
+func Eval(node ast.Node, env *object.Environment) object.Object {
 	switch node := node.(type) {
 	case *ast.Program:
 		return evalProgram(node, env)
@@ -94,7 +94,7 @@ func Eval(node ast.Node, env *object.Enviroment) object.Object {
 	return nil
 }
 
-func evalProgram(program *ast.Program, env *object.Enviroment) object.Object {
+func evalProgram(program *ast.Program, env *object.Environment) object.Object {
 	var result object.Object
 	for _, stmt := range program.Statements {
 		result = Eval(stmt, env)
@@ -109,7 +109,7 @@ func evalProgram(program *ast.Program, env *object.Enviroment) object.Object {
 	return result
 }
 
-func evalStatements(stmts []ast.Statement, env *object.Enviroment) object.Object {
+func evalStatements(stmts []ast.Statement, env *object.Environment) object.Object {
 	var result object.Object
 
 	for _, stmt := range stmts {
@@ -217,7 +217,7 @@ func evalBooleanInfixExpression(operator string, left, right object.Object) obje
 	}
 }
 
-func evalIfExpression(ie *ast.IfExpression, env *object.Enviroment) object.Object {
+func evalIfExpression(ie *ast.IfExpression, env *object.Environment) object.Object {
 	condition := Eval(ie.Condition, env)
 	if isError(condition) {
 		return condition
@@ -256,7 +256,7 @@ func isError(obj object.Object) bool {
 	return false
 }
 
-func evalIdentifier(node *ast.Identifier, env *object.Enviroment) object.Object {
+func evalIdentifier(node *ast.Identifier, env *object.Environment) object.Object {
 	if val, ok := env.Get(node.Value); ok {
 		return val
 	}
@@ -267,7 +267,7 @@ func evalIdentifier(node *ast.Identifier, env *object.Enviroment) object.Object 
 	return newError("identifier not found: " + node.Value)
 }
 
-func evalExpressions(expressions []ast.Expression, env *object.Enviroment) []object.Object {
+func evalExpressions(expressions []ast.Expression, env *object.Environment) []object.Object {
 	var result []object.Object
 	for _, expr := range expressions {
 		evaluated := Eval(expr, env)
@@ -293,8 +293,8 @@ func applyFunction(fn object.Object, args []object.Object) object.Object {
 
 }
 
-func extendFunctionEnv(fn *object.Function, args []object.Object) *object.Enviroment {
-	env := object.NewEnclosedEnviroment(fn.Env)
+func extendFunctionEnv(fn *object.Function, args []object.Object) *object.Environment {
+	env := object.NewEnclosedEnvironment(fn.Env)
 	for paramIdx, param := range fn.Parameters {
 		env.Set(param.Value, args[paramIdx])
 	}
@@ -338,7 +338,7 @@ func evalArrayIndexExpression(left, index object.Object) object.Object {
 	return array.Elements[idx]
 }
 
-func evalHashLiteral(node *ast.HashLiteral, env *object.Enviroment) object.Object {
+func evalHashLiteral(node *ast.HashLiteral, env *object.Environment) object.Object {
 	pairs := make(map[object.HashKey]object.HashPair)
 
 	for keyNode, valueNode := range node.Pairs {

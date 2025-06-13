@@ -39,6 +39,7 @@ const (
 	LBRANCKET TokenType = "["
 	RBRANCKET TokenType = "]"
 	COLON     TokenType = ":"
+	MACRO     TokenType = "MACRO"
 )
 
 var keywords = map[string]TokenType{
@@ -49,6 +50,7 @@ var keywords = map[string]TokenType{
 	"false":  FALSE,
 	"if":     IF,
 	"else":   ELSE,
+	"macro":  MACRO,
 }
 
 func LookupIdent(ident string) TokenType {

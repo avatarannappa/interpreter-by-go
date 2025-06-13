@@ -29,6 +29,7 @@ if (5 < 10) {
 "foobar"
 "foo bar"
 [1, 2];
+macro(x, y) { x + y; };
 `
 
 	tests := []struct {
@@ -116,6 +117,20 @@ if (5 < 10) {
 		{token.INT, "2"},
 		{token.RBRANCKET, "]"},
 		{token.SEMICOLON, ";"},
+		{token.MACRO, "macro"},
+		{token.LPAREN, "("},
+		{token.IDENT, "x"},
+		{token.COMMA, ","},
+		{token.IDENT, "y"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.IDENT, "x"},
+		{token.PLUS, "+"},
+		{token.IDENT, "y"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
+		{token.SEMICOLON, ";"},
+		{token.EOF, ""},
 		{token.EOF, ""},
 	}
 
